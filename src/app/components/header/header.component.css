@@ -1,0 +1,45 @@
+/* navbar.component.css */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #dee2e6;
+  position: fixed;
+  width: 100%;
+  top: 0;
+  left: 0;
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.logo {
+  height: 40px;
+  margin-right: 10px;
+}
+
+.company-name {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.navbar-right {
+  display: flex;
+  align-items: center;
+}
+
+.user-profile-icon {
+  font-size: 26px;
+  cursor: pointer;
+  margin-right: 20px; /* Ensure there is space to the right of the icon */
+}
+
+.mat-icon-button .mat-icon {
+  border: none; /* Removes any border */
+  background: transparent; /* Ensures no background color */
+}

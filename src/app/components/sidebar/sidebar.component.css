@@ -1,0 +1,37 @@
+.sidebar {
+  height: calc(
+    100% - 60px
+  ); /* Adjust the height to be less the height of the navbar */
+  width: 200px;
+  position: fixed;
+  z-index: 1;
+  top: 60px; /* Set to the height of the navbar */
+  left: 0;
+  background-color: #111;
+  overflow-x: hidden;
+  padding-top: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar ul li a {
+  padding: 10px 15px;
+  text-decoration: none;
+  font-size: 18px;
+  color: #818181;
+  display: block;
+  transition: 0.3s;
+}
+
+.sidebar ul li a:hover {
+  color: #f1f1f1;
+}
+
+.content {
+  margin-left: 200px;
+  padding: 1px 16px;
+  height: 1000px; /* Adjustable based on content */
+}
