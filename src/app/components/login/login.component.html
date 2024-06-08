@@ -1,0 +1,39 @@
+<form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+  <p-card header="Login">
+    <div class="field">
+      <label for="email">Email</label>
+      <input
+        type="text"
+        pInputText
+        formControlName="email"
+        class="w-full"
+        name="email"
+        placeholder="Enter your email address"
+      />
+      <small *ngIf="email.invalid" class="block p-error">
+        <div *ngIf="email.errors?.['required']">Email is required</div>
+      </small>
+    </div>
+    <div class="field">
+      <label for="password">Password</label>
+      <input
+        type="password"
+        pInputText
+        formControlName="password"
+        class="w-full"
+        name="password"
+        placeholder="Enter your password"
+      />
+      <small *ngIf="password.invalid" class="block p-error">
+        <div *ngIf="password.errors?.['required']">Password is required</div>
+      </small>
+    </div>
+    <p-button
+      label="Login"
+      styleClass="w-full"
+      [disabled]="loginForm.invalid"
+      type="submit"
+    />
+    <div class="mt-3">Not a member? <a routerLink="/register">Register</a></div>
+  </p-card>
+</form>
