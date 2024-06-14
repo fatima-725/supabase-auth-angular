@@ -1,0 +1,24 @@
+<div class="course-container">
+  <h1>Course List</h1>
+
+  <input [(ngModel)]="newCourse.title" placeholder="Course Title" />
+  <input [(ngModel)]="newCourse.description" placeholder="Course Description" />
+  <button (click)="addCourse()">Add Course</button>
+
+  <ul>
+    <li *ngFor="let course of courses">
+      <p *ngIf="course.title">{{ course.title }}</p>
+      <p *ngIf="course.description">{{ course.description }}</p>
+
+      <button (click)="course.id !== undefined ? edit() : null">Update</button>
+      <button
+        (click)="course.id !== undefined ? deleteCourse(course.id) : null"
+      >
+        Delete
+      </button>
+      <button (click)="course.id !== undefined ? enroll(course.id) : null">
+        Enroll
+      </button>
+    </li>
+  </ul>
+</div>

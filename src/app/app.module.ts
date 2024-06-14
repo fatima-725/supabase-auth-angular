@@ -18,6 +18,10 @@ import { HeaderComponent } from './components/header/header.component';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { SidebarComponent } from './components/sidebar/sidebar.component';
+import { TodoComponent } from './components/todo/todo.component';
+import { FormsModule } from '@angular/forms';
+import { CoursesComponent } from './components/courses/courses.component';
+import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 
 @NgModule({
   declarations: [
@@ -27,6 +31,9 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     HomeComponent,
     HeaderComponent,
     SidebarComponent,
+    TodoComponent,
+    CoursesComponent,
+    MyCoursesComponent,
   ],
   imports: [
     BrowserModule,
@@ -40,6 +47,7 @@ import { SidebarComponent } from './components/sidebar/sidebar.component';
     BrowserAnimationsModule,
     MatIconModule,
     MatMenuModule,
+    FormsModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

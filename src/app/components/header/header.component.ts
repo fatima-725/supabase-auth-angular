@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { SupaService } from '../../service/supa.service';
 
 @Component({
   selector: 'app-header',
@@ -7,10 +8,10 @@ import { Router } from '@angular/router';
   styleUrl: './header.component.css',
 })
 export class HeaderComponent {
-  constructor(private router: Router) {}
+  constructor(private router: Router, private supaservice: SupaService) {}
 
-  logout() {
-    sessionStorage.clear();
+  async logout() {
+    await this.supaservice.signOutUser();
     this.router.navigate(['login']);
   }
 }

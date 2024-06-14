@@ -1,0 +1,39 @@
+.course-container {
+  max-width: 500px;
+  margin: 0 auto;
+  padding: 20px;
+  text-align: center;
+}
+
+input[type="text"],
+input[type="textarea"] {
+  width: calc(100% - 100px);
+  padding: 10px;
+  margin: 10px 0;
+}
+
+button {
+  padding: 10px;
+  margin: 10px;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+li {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+input[type="checkbox"] {
+  margin-right: 10px;
+}
+
+.completed {
+  text-decoration: line-through;
+}
