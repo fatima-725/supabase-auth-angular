@@ -22,6 +22,7 @@ import { TodoComponent } from './components/todo/todo.component';
 import { FormsModule } from '@angular/forms';
 import { CoursesComponent } from './components/courses/courses.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 @NgModule({
   declarations: [
@@ -48,6 +49,7 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
     MatIconModule,
     MatMenuModule,
     FormsModule,
+    MatSnackBarModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

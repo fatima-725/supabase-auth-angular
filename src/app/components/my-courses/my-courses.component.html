@@ -1,18 +1,18 @@
-<!-- courses.component.html -->
-<div>
-  <h2>My Courses</h2>
-  <ul>
-    <li *ngFor="let userCourse of UserCourses">
-      {{ userCourse.title }}
-      <button
-        (click)="
-          userCourse.id !== undefined
-            ? removeCourseFromUser(userCourse.id)
-            : null
-        "
-      >
-        Remove
-      </button>
-    </li>
-  </ul>
+<!-- my-courses.component.html -->
+<div class="course-container">
+  <h1>My Courses</h1>
+  <div class="course-list">
+    <div class="course-card" *ngFor="let userCourse of UserCourses">
+      <div class="course-details">
+        <h2>{{ userCourse.title }}</h2>
+        <p>{{ userCourse.description }}</p>
+        <button
+          class="remove-button"
+          (click)="userCourse.id ? removeCourseFromUser(userCourse.id) : null"
+        >
+          Remove
+        </button>
+      </div>
+    </div>
+  </div>
 </div>
