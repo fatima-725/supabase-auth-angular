@@ -2,44 +2,101 @@
   <h1>Course List</h1>
 
   <div *ngIf="isAdmin" class="add-course">
-    <input [(ngModel)]="newCourse.title" placeholder="Course Title" />
     <input
+      type="text"
+      pInputText
+      [(ngModel)]="newCourse.title"
+      placeholder="Course Title"
+    />
+    <input
+      type="text"
+      pInputText
       [(ngModel)]="newCourse.description"
       placeholder="Course Description"
     />
-    <button (click)="addCourse()">Add Course</button>
+    <p-button label="Add Course" (click)="addCourse()" />
   </div>
 
   <div class="course-list">
-    <div *ngFor="let course of courses" class="course-card">
-      <div class="course-details">
-        <div *ngIf="isAdmin">
-          <input
-            [(ngModel)]="course.title"
-            (change)="updateCourse(course)"
-            placeholder="Course Title"
-          />
-          <input
-            [(ngModel)]="course.description"
-            (change)="updateCourse(course)"
-            placeholder="Course Description"
-          />
-          <button
-            (click)="course.id !== undefined ? deleteCourse(course.id) : null"
-          >
-            Delete
-          </button>
-        </div>
-        <div *ngIf="!isAdmin">
-          <h2>{{ course.title }}</h2>
+    <div *ngFor="let course of courses">
+      <div *ngIf="isAdmin">
+        <p-card header="{{ course.title }}" [style]="{ width: '360px' }">
           <p>{{ course.description }}</p>
-        </div>
-        <button
-          class="enroll-button"
-          (click)="course.id !== undefined ? enroll(course.id) : null"
-        >
-          Enroll
-        </button>
+          <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+              <p-button
+                label="Update"
+                severity="primary"
+                class="w-full"
+                styleClass="w-full"
+                (click)="openUpdateDialog(course)"
+              />
+              <p-dialog
+                header="Update Course"
+                [modal]="true"
+                [(visible)]="visible"
+                [style]="{ width: '25rem' }"
+              >
+                <div class="flex align-items-center gap-3 mb-3">
+                  <label for="title" class="font-semibold w-6rem">Title</label>
+                  <input
+                    pInputText
+                    id="title"
+                    class="flex-auto"
+                    autocomplete="off"
+                    [(ngModel)]="selectedCourse.title"
+                  />
+                </div>
+                <div class="flex align-items-center gap-3 mb-5">
+                  <label for="description" class="font-semibold w-6rem"
+                    >Description</label
+                  >
+                  <input
+                    pInputText
+                    id="description"
+                    class="flex-auto"
+                    autocomplete="off"
+                    [(ngModel)]="selectedCourse.description"
+                  />
+                </div>
+                <div class="flex justify-content-end gap-2">
+                  <p-button
+                    label="Cancel"
+                    severity="secondary"
+                    (click)="visible = false"
+                  />
+                  <p-button label="Save" (click)="saveAndCloseDialog()" />
+                </div>
+              </p-dialog>
+              <p-button
+                label="Delete"
+                severity="secondary"
+                class="w-full"
+                styleClass="w-full"
+                (click)="
+                  course.id !== undefined ? deleteCourse(course.id) : null
+                "
+              />
+            </div>
+          </ng-template>
+        </p-card>
+      </div>
+
+      <div *ngIf="!isAdmin">
+        <p-card header="{{ course.title }}" [style]="{ width: '360px' }">
+          <p>{{ course.description }}</p>
+          <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+              <p-button
+                label="Enroll"
+                severity="primary"
+                class="w-full"
+                styleClass="w-full"
+                (click)="course.id !== undefined ? enroll(course.id) : null"
+              />
+            </div>
+          </ng-template>
+        </p-card>
       </div>
     </div>
   </div>
@@ -49,52 +106,101 @@
   <h1>Course List</h1>
 
   <div *ngIf="isAdmin" class="add-course">
-    <input [(ngModel)]="newCourse.title" placeholder="Course Title" />
     <input
+      type="text"
+      pInputText
+      [(ngModel)]="newCourse.title"
+      placeholder="Course Title"
+    />
+    <input
+      type="text"
+      pInputText
       [(ngModel)]="newCourse.description"
       placeholder="Course Description"
     />
-    <button (click)="addCourse()">Add Course</button>
+    <p-button label="Add Course" (click)="addCourse()" />
   </div>
 
   <div class="course-list">
-    <div *ngFor="let course of courses" class="course-card">
-      <div *ngIf="isAdmin" class="course-details">
-        Title:
-        <input
-          [(ngModel)]="course.title"
-          class="input-title"
-          placeholder="Course Title"
-        />
-        Description:
-        <input
-          [(ngModel)]="course.description"
-          class="input-description"
-          placeholder="Course Description"
-        />
-        <div class="button-group">
-          <button
-            (click)="course.id !== undefined ? updateCourse(course) : null"
-          >
-            Update
-          </button>
-          <button
-            (click)="course.id !== undefined ? deleteCourse(course.id) : null"
-          >
-            Delete
-          </button>
-        </div>
+    <div *ngFor="let course of courses">
+      <div *ngIf="isAdmin">
+        <p-card header="{{ course.title }}" [style]="{ width: '360px' }">
+          <p>{{ course.description }}</p>
+          <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+              <p-button
+                label="Update"
+                severity="primary"
+                class="w-full"
+                styleClass="w-full"
+                (click)="openUpdateDialog(course)"
+              />
+              <p-dialog
+                header="Update Course"
+                [modal]="true"
+                [(visible)]="visible"
+                [style]="{ width: '25rem' }"
+              >
+                <div class="flex align-items-center gap-3 mb-3">
+                  <label for="title" class="font-semibold w-6rem">Title</label>
+                  <input
+                    pInputText
+                    id="title"
+                    class="flex-auto"
+                    autocomplete="off"
+                    [(ngModel)]="selectedCourse.title"
+                  />
+                </div>
+                <div class="flex align-items-center gap-3 mb-5">
+                  <label for="description" class="font-semibold w-6rem"
+                    >Description</label
+                  >
+                  <input
+                    pInputText
+                    id="description"
+                    class="flex-auto"
+                    autocomplete="off"
+                    [(ngModel)]="selectedCourse.description"
+                  />
+                </div>
+                <div class="flex justify-content-end gap-2">
+                  <p-button
+                    label="Cancel"
+                    severity="secondary"
+                    (click)="visible = false"
+                  />
+                  <p-button label="Save" (click)="saveAndCloseDialog()" />
+                </div>
+              </p-dialog>
+              <p-button
+                label="Delete"
+                severity="secondary"
+                class="w-full"
+                styleClass="w-full"
+                (click)="
+                  course.id !== undefined ? deleteCourse(course.id) : null
+                "
+              />
+            </div>
+          </ng-template>
+        </p-card>
       </div>
 
       <div *ngIf="!isAdmin">
-        <h2>{{ course.title }}</h2>
-        <p>{{ course.description }}</p>
-        <button
-          class="enroll-button"
-          (click)="course.id !== undefined ? enroll(course.id) : null"
-        >
-          Enroll
-        </button>
+        <p-card header="{{ course.title }}" [style]="{ width: '360px' }">
+          <p>{{ course.description }}</p>
+          <ng-template pTemplate="footer">
+            <div class="flex gap-3 mt-1">
+              <p-button
+                label="Enroll"
+                severity="primary"
+                class="w-full"
+                styleClass="w-full"
+                (click)="course.id !== undefined ? enroll(course.id) : null"
+              />
+            </div>
+          </ng-template>
+        </p-card>
       </div>
     </div>
   </div>

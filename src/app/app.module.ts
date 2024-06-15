@@ -23,6 +23,7 @@ import { FormsModule } from '@angular/forms';
 import { CoursesComponent } from './components/courses/courses.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { DialogModule } from 'primeng/dialog';
 
 @NgModule({
   declarations: [
@@ -50,6 +51,8 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
     MatMenuModule,
     FormsModule,
     MatSnackBarModule,
+    DialogModule,
+    InputTextModule,
   ],
   providers: [MessageService],
   bootstrap: [AppComponent],

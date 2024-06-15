@@ -128,6 +128,7 @@ import { SupaService } from '../../service/supa.service';
 import { Course } from '../../models/course.model';
 import { MatDialog } from '@angular/material/dialog';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { FormBuilder } from '@angular/forms';
 
 @Component({
   selector: 'app-courses',
@@ -138,12 +139,10 @@ export class CoursesComponent implements OnInit {
   courses: Course[] = [];
   newCourse: Course = { title: '', description: '' };
   isAdmin: boolean = false;
+  visible: boolean = false;
+  selectedCourse: Course = { title: '', description: '' };
 
-  constructor(
-    private supabaseService: SupaService,
-    private router: Router,
-    private snackBar: MatSnackBar
-  ) {}
+  constructor(private supabaseService: SupaService, private router: Router) {}
 
   async ngOnInit() {
     this.isAdmin = await this.supabaseService.isAdmin();
@@ -165,6 +164,26 @@ export class CoursesComponent implements OnInit {
     }
   }
 
+  // async addCourse() {
+  //   if (this.isAdmin) {
+  //     if (this.newCourse.title.trim() && this.newCourse.description.trim()) {
+  //       try {
+  //         const checkCourse = await this.supabaseService.getCourseByTitle(this.newCourse.title);
+  //         if (checkCourse) {
+  //           console.log('Course already exists');
+  //           return;
+  //         }
+  //         const { data } = await this.supabaseService.addCourse(this.newCourse);
+  //         if (data) {
+  //           this.courses.push(data[0]);
+  //           this.newCourse = { title: '', description: '' };
+  //         }
+  //       } catch (error) {
+  //         console.error('Error adding course:', error);
+  //       }
+  //     }
+  //   }
+  // }
   async addCourse() {
     if (this.isAdmin) {
       if (this.newCourse.title.trim() && this.newCourse.description.trim()) {
@@ -192,17 +211,16 @@ export class CoursesComponent implements OnInit {
     if (this.isAdmin) {
       try {
         const checkCourse = await this.supabaseService.getCourseByTitle(
-          this.newCourse.title
+          this.selectedCourse.title
         );
         if (checkCourse) {
           console.log('Course already exists');
-          return;
-        }
-        const { data } = await this.supabaseService.updateCourse(course);
-        if (data) {
-          const index = this.courses.findIndex((c) => c.id === course.id);
-          if (index !== -1) {
-            this.courses[index] = data[0];
+          const { data } = await this.supabaseService.updateCourse(course);
+          if (data) {
+            const index = this.courses.findIndex((c) => c.id === course.id);
+            if (index !== -1) {
+              this.courses[index] = data[0];
+            }
           }
         }
       } catch (error) {
@@ -243,5 +261,16 @@ export class CoursesComponent implements OnInit {
     } else {
       this.router.navigate(['/login']);
     }
+  }
+  openUpdateDialog(course: Course) {
+    this.selectedCourse = { ...course };
+    this.visible = true;
+  }
+
+  saveAndCloseDialog() {
+    if (this.selectedCourse.id !== undefined) {
+      this.updateCourse(this.selectedCourse);
+    }
+    this.visible = false;
   }
 }

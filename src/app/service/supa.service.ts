@@ -165,12 +165,18 @@ export class SupaService {
     return { data, error };
   }
 
-  async getCourseByTitle(title: string) {
+  async getCourseByTitle(title: string): Promise<Course | null> {
     const { data, error } = await this.supabase_client
       .from('courses')
       .select('*')
-      .eq('title', title);
-    return data;
+      .eq('title', title)
+      .single();
+    if (error) {
+      console.log('Course not found');
+      return null;
+    }
+
+    return data ? data : null;
   }
 
   async getCourses() {
