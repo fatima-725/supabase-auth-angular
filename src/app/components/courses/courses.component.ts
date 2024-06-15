@@ -200,6 +200,7 @@ export class CoursesComponent implements OnInit {
             this.courses.push(data[0]);
             this.newCourse = { title: '', description: '' };
           }
+          this.loadCourses();
         } catch (error) {
           console.error('Error adding course:', error);
         }
@@ -222,6 +223,7 @@ export class CoursesComponent implements OnInit {
               this.courses[index] = data[0];
             }
           }
+          this.loadCourses();
         }
       } catch (error) {
         console.log('Error updating course', error);
