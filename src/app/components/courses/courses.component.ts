@@ -141,15 +141,17 @@ export class CoursesComponent implements OnInit {
   isAdmin: boolean = false;
   visible: boolean = false;
   selectedCourse: Course = { title: '', description: '' };
-
+  isLoading: boolean = true;
   constructor(private supabaseService: SupaService, private router: Router) {}
 
   async ngOnInit() {
     this.isAdmin = await this.supabaseService.isAdmin();
     this.loadCourses();
+    this.isLoading = false;
   }
 
   async loadCourses() {
+    this.isLoading = true;
     try {
       const { data, error } = await this.supabaseService.getCourses();
       if (data) {
@@ -162,6 +164,7 @@ export class CoursesComponent implements OnInit {
     } catch (error) {
       console.error('Error loading courses', error);
     }
+    this.isLoading = false;
   }
 
   // async addCourse() {
@@ -238,6 +241,7 @@ export class CoursesComponent implements OnInit {
         if (data) {
           this.courses = this.courses.filter((course) => course.id !== id);
         }
+        this.loadCourses();
       } catch (error) {
         console.error('Error deleting course:', error);
       }

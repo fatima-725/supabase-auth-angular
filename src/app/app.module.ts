@@ -24,6 +24,7 @@ import { CoursesComponent } from './components/courses/courses.component';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogModule } from 'primeng/dialog';
+import { ProgressSpinnerModule } from 'primeng/progressspinner';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { DialogModule } from 'primeng/dialog';
     FormsModule,
     MatSnackBarModule,
     DialogModule,
+    ProgressSpinnerModule,
     InputTextModule,
   ],
   providers: [MessageService],

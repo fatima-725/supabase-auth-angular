@@ -36,6 +36,7 @@
                 [modal]="true"
                 [(visible)]="visible"
                 [style]="{ width: '25rem' }"
+                [draggable]="false"
               >
                 <div class="flex align-items-center gap-3 mb-3">
                   <label for="title" class="font-semibold w-6rem">Title</label>
@@ -121,7 +122,13 @@
     <p-button label="Add Course" (click)="addCourse()" />
   </div>
 
-  <div class="course-list">
+  <!-- Loader -->
+  <div *ngIf="isLoading" class="loader">
+    <p-progressSpinner ariaLabel="loading" />
+  </div>
+
+  <!-- Courses List -->
+  <div *ngIf="!isLoading" class="course-list">
     <div *ngFor="let course of courses">
       <div *ngIf="isAdmin">
         <p-card header="{{ course.title }}" [style]="{ width: '360px' }">
@@ -140,6 +147,7 @@
                 [modal]="true"
                 [(visible)]="visible"
                 [style]="{ width: '25rem' }"
+                [draggable]="false"
               >
                 <div class="flex align-items-center gap-3 mb-3">
                   <label for="title" class="font-semibold w-6rem">Title</label>
