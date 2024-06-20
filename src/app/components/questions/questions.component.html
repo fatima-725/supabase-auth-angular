@@ -1,0 +1,189 @@
+<div class="main-content">
+  <div class="question-container">
+    <div class="div-add-question">
+      <h1>Add Question</h1>
+
+      <div *ngIf="isAdmin" class="add-question">
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="newQuestion.question"
+          placeholder="Question"
+          class="question"
+        />
+        <div class="options">
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="newQuestion.option_a"
+            placeholder="Option A"
+          />
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="newQuestion.option_b"
+            placeholder="Option B"
+          />
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="newQuestion.option_c"
+            placeholder="Option C"
+          />
+          <input
+            type="text"
+            pInputText
+            [(ngModel)]="newQuestion.option_d"
+            placeholder="Option D"
+          />
+        </div>
+
+        <input
+          type="text"
+          pInputText
+          [(ngModel)]="newQuestion.correct_option"
+          placeholder="Correct Option"
+        />
+        <p-button label="Add Question" (click)="addQuestion()" />
+      </div>
+    </div>
+
+    <div class="div-question-list">
+      <h1>Question List</h1>
+      <!-- Loader -->
+      <div *ngIf="isLoading" class="loader">
+        <p-progressSpinner ariaLabel="loading" />
+      </div>
+
+      <!-- question List -->
+      <div *ngIf="!isLoading" class="question-list">
+        <div *ngFor="let question of question">
+          <div *ngIf="isAdmin">
+            <p-card
+              header="{{ question.question }}"
+              [style]="{ width: '360px' }"
+            >
+              <p>A: {{ question.option_a }}</p>
+              <p>B: {{ question.option_b }}</p>
+              <p>C: {{ question.option_c }}</p>
+              <p>D: {{ question.option_d }}</p>
+              <p>Correct Option: {{ question.correct_option }}</p>
+              <ng-template pTemplate="footer">
+                <div class="flex gap-3 mt-1">
+                  <p-button
+                    label="Update"
+                    severity="primary"
+                    class="w-full"
+                    styleClass="w-full"
+                    (click)="openUpdateDialog(question)"
+                  />
+                  <p-dialog
+                    header="Update Question"
+                    [modal]="true"
+                    [(visible)]="visible"
+                    [style]="{ width: '25rem' }"
+                    [draggable]="false"
+                  >
+                    <div class="flex align-items-center gap-3 mb-3">
+                      <label for="question" class="font-semibold w-6rem"
+                        >Question</label
+                      >
+                      <input
+                        pInputText
+                        id="question"
+                        class="flex-auto"
+                        autocomplete="off"
+                        [(ngModel)]="selectedQuestion.question"
+                      />
+                    </div>
+                    <div class="flex align-items-center gap-3 mb-5">
+                      <label for="option_a" class="font-semibold w-6rem"
+                        >Option A</label
+                      >
+                      <input
+                        pInputText
+                        id="option_a"
+                        class="flex-auto"
+                        autocomplete="off"
+                        [(ngModel)]="selectedQuestion.option_a"
+                      />
+                    </div>
+                    <div class="flex align-items-center gap-3 mb-5">
+                      <label for="option_b" class="font-semibold w-6rem"
+                        >Option B</label
+                      >
+                      <input
+                        pInputText
+                        id="option_b"
+                        class="flex-auto"
+                        autocomplete="off"
+                        [(ngModel)]="selectedQuestion.option_b"
+                      />
+                    </div>
+                    <div class="flex align-items-center gap-3 mb-5">
+                      <label for="option_c" class="font-semibold w-6rem"
+                        >Option C</label
+                      >
+                      <input
+                        pInputText
+                        id="option_c"
+                        class="flex-auto"
+                        autocomplete="off"
+                        [(ngModel)]="selectedQuestion.option_c"
+                      />
+                    </div>
+                    <div class="flex align-items-center gap-3 mb-5">
+                      <label for="option_d" class="font-semibold w-6rem"
+                        >Option D</label
+                      >
+                      <input
+                        pInputText
+                        id="option_d"
+                        class="flex-auto"
+                        autocomplete="off"
+                        [(ngModel)]="selectedQuestion.option_d"
+                      />
+                    </div>
+                    <div class="flex align-items-center gap-3 mb-5">
+                      <label for="correct_option" class="font-semibold w-6rem"
+                        >Correct Option</label
+                      >
+                      <input
+                        pInputText
+                        id="correct_option"
+                        class="flex-auto"
+                        autocomplete="off"
+                        [(ngModel)]="selectedQuestion.correct_option"
+                      />
+                    </div>
+                    <div class="flex justify-content-end gap-2">
+                      <p-button
+                        label="Cancel"
+                        severity="secondary"
+                        (click)="visible = false"
+                      />
+                      <p-button label="Save" (click)="saveAndCloseDialog()" />
+                    </div>
+                  </p-dialog>
+                  <p-button
+                    label="Delete"
+                    severity="secondary"
+                    class="w-full"
+                    styleClass="w-full"
+                    (click)="
+                      question.id !== undefined
+                        ? deleteQuestion(question.id)
+                        : null
+                    "
+                  />
+                </div>
+              </ng-template>
+            </p-card>
+          </div>
+
+          <div *ngIf="!isAdmin">not admin</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

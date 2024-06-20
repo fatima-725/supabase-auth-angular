@@ -7,6 +7,8 @@ import { CoursesComponent } from './components/courses/courses.component';
 import { TodoComponent } from './components/todo/todo.component';
 import { AuthGuard } from './guards/auth-guard.guard';
 import { MyCoursesComponent } from './components/my-courses/my-courses.component';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { QuestionsComponent } from './components/questions/questions.component';
 
 const routes: Routes = [
   { path: 'login', component: LoginComponent },
@@ -17,6 +19,11 @@ const routes: Routes = [
   {
     path: 'my-courses',
     component: MyCoursesComponent,
+    canActivate: [AuthGuard],
+  },
+  {
+    path: 'question',
+    component: QuestionsComponent,
     canActivate: [AuthGuard],
   },
 ];

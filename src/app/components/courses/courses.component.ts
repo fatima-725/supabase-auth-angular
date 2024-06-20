@@ -201,8 +201,8 @@ export class CoursesComponent implements OnInit {
           const { data } = await this.supabaseService.addCourse(this.newCourse);
           if (data) {
             this.courses.push(data[0]);
-            this.newCourse = { title: '', description: '' };
           }
+          this.newCourse = { title: '', description: '' };
           this.loadCourses();
         } catch (error) {
           console.error('Error adding course:', error);

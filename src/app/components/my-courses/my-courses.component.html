@@ -3,16 +3,24 @@
   <h1>My Courses</h1>
   <div class="course-list">
     <div class="course-card" *ngFor="let userCourse of UserCourses">
-      <div class="course-details">
-        <h2>{{ userCourse.title }}</h2>
+      <p-card header="{{ userCourse.title }}" [style]="{ width: '360px' }">
         <p>{{ userCourse.description }}</p>
-        <button
-          class="remove-button"
-          (click)="userCourse.id ? removeCourseFromUser(userCourse.id) : null"
-        >
-          Remove
-        </button>
-      </div>
+        <ng-template pTemplate="footer">
+          <div class="flex gap-3 mt-1">
+            <p-button
+              label="Enroll"
+              severity="primary"
+              class="w-full"
+              styleClass="w-full"
+              (click)="
+                userCourse.id !== undefined
+                  ? removeCourseFromUser(userCourse.id)
+                  : null
+              "
+            />
+          </div>
+        </ng-template>
+      </p-card>
     </div>
   </div>
 </div>

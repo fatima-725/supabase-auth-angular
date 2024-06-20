@@ -4,6 +4,7 @@ import { passwordMatchValidator } from '../../shared/password-matched.directive'
 import { MessageService } from 'primeng/api';
 import { Router } from '@angular/router';
 import { SupaService } from '../../service/supa.service';
+import { passwordTrimCheck } from '../../shared/password-trim-check.directive';
 
 @Component({
   selector: 'app-register',
@@ -18,7 +19,7 @@ export class RegisterComponent {
         [Validators.required, Validators.pattern(/^[a-zA-Z]+(?:[a-zA-Z]+)*$/)],
       ],
       email: ['', [Validators.required, Validators.email]],
-      password: ['', [Validators.required]],
+      password: ['', [Validators.required, passwordTrimCheck()]],
       confirmPassword: ['', [Validators.required]],
     },
     {

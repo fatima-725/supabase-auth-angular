@@ -25,6 +25,8 @@ import { MyCoursesComponent } from './components/my-courses/my-courses.component
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { DialogModule } from 'primeng/dialog';
 import { ProgressSpinnerModule } from 'primeng/progressspinner';
+import { QuizComponent } from './components/quiz/quiz.component';
+import { QuestionsComponent } from './components/questions/questions.component';
 
 @NgModule({
   declarations: [
@@ -37,6 +39,8 @@ import { ProgressSpinnerModule } from 'primeng/progressspinner';
     TodoComponent,
     CoursesComponent,
     MyCoursesComponent,
+    QuizComponent,
+    QuestionsComponent,
   ],
   imports: [
     BrowserModule,

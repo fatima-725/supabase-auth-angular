@@ -4,6 +4,7 @@ import { environment } from '../../environments/environment.development';
 import { Todo } from '../models/todo.model';
 import { Course } from '../models/course.model';
 import { User } from '@supabase/supabase-js';
+import { Question } from '../models/question.model';
 
 interface myUser extends User {
   user_role: String;
@@ -81,6 +82,7 @@ export class SupaService {
     }
   }
 
+  // check if user is admin
   async isAdmin(): Promise<boolean> {
     const user = await this.getUser();
     if (user) {
@@ -250,5 +252,57 @@ export class SupaService {
       .eq('course_id', courseId)
       .eq('user_id', user.id);
     return { data, error };
+  }
+
+  // question
+  async addQuestion(question: Question) {
+    const { data, error } = await this.supabase_client
+      .from('question')
+      .insert(question);
+    return { data, error };
+  }
+
+  async getQuestions() {
+    const { data, error } = await this.supabase_client
+      .from('question')
+      .select('*');
+    return { data, error };
+  }
+
+  async updateQuestion(question: Question) {
+    const { data, error } = await this.supabase_client
+      .from('question')
+      .update({
+        question: question.question,
+        option_a: question.option_a,
+        option_b: question.option_b,
+        option_c: question.option_c,
+        option_d: question.option_d,
+        correct_option: question.correct_option,
+      })
+      .eq('id', question.id);
+    return { data, error };
+  }
+
+  async deleteQuestion(id: number) {
+    const { data, error } = await this.supabase_client
+      .from('question')
+      .delete()
+      .eq('id', id);
+    return { data, error };
+  }
+
+  async getQuestionByTitle(question: string): Promise<Course | null> {
+    const { data, error } = await this.supabase_client
+      .from('question')
+      .select('*')
+      .eq('question', question)
+      .single();
+    if (error) {
+      console.log('question not found');
+      return null;
+    }
+
+    return data ? data : null;
   }
 }
